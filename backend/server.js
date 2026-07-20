@@ -9,7 +9,7 @@ app.get("/", (req, res) => {
   res.send("Gyan Auto Backend Running");
 });
 
-const PORT = 5000;
+const PORT = 50;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
