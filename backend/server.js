@@ -1,16 +1,25 @@
 const express = require("express");
 
-const app = express();
+const connectDB = require("./config/db");
 
+const enquiryRoutes = require("./routes/enquiryRoutes");
+
+const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Gyan Auto Backend Running");
+connectDB();
+
+app.use("/api", enquiryRoutes);
+
+app.get("/",(req,res) =>{
+  res.json({
+    msg:"gayn automation"
+  })
 });
 
-const PORT = 50;
+app.listen(3000, () => {
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log("Server Running");
+
 });

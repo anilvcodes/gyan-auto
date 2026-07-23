@@ -10,4 +10,4 @@ const enquirySchema=new mongoose.Schema({
 {
     timestamps:true
 });
-module.exports=mongoose.model("Enquairy",enquirySchema);
+module.exports=mongoose.model("Enquiry",enquirySchema);
