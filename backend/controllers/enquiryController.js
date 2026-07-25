@@ -1,12 +1,12 @@
-const Enquiry = require ("../controllers/enquiryController");
+const Enquiry = require("../models/Enquiry");
 const addEnquiry = async(req,res)=>{
 
     try{
-        const enquiry= new Enquairy(req.body);
+        const enquiry= new Enquiry(req.body);
         await enquiry.save();
         res.json({
             success:true,
-            message:"Enquairy Saved",
+            message:"Enquiry Saved",
             data:enquiry
         });
     }
