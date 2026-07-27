@@ -1,22 +1,30 @@
 const Enquiry = require("../models/Enquiry");
-const addEnquiry = async(req,res)=>{
+const enquiryValidator = require("../validators/enquiryValidator");
 
-    try{
-        const enquiry= new Enquiry(req.body);
-        await enquiry.save();
-        res.json({
-            success:true,
-            message:"Enquiry Saved",
-            data:enquiry
-        });
+
+const addEnquiry = async (req, res) => {
+  try {
+    const result = enquiryValidator.safeParse(req.body);
+
+    if (!result.success) {
+      return res.status(400).json({
+        success: false,
+        errors: result.error.issues,
+      });
     }
-    catch(err){
-        res.status(500).json({
-            success:false,
-            message:err.message
 
-        })
-
-    }
+    const enquiry = new Enquiry(result.data);
+    await enquiry.save();
+    res.json({
+      success: true,
+      message: "Enquiry Saved",
+      data: enquiry,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
 };
-module.exports={addEnquiry};
+module.exports = { addEnquiry };
